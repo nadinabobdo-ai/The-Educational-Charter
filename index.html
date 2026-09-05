@@ -108,7 +108,8 @@
 
             .tab-content.active {
                 display: flex;
-                gap: 30px;
+                gap: 25px;
+                align-items: stretch !important; /* يضمن امتداد الفريم الأيسر لنفس نهاية البطاقة اليمنى */
             }
 
             @keyframes fadeIn {
@@ -147,6 +148,7 @@
                 flex-direction: column;
                 flex-grow: 1; /* يجعل صندوق الـ PDF يشفط كل الفراغ السفلية */
             }
+
             /* تنسيق الشريط العلوي للمعاينة */
             .pdf-header {
                 background: #fdf2f5; /* وردي ناعم */
@@ -189,24 +191,27 @@
                 border: none;
             }
 
-            /* الجزء الأيسر الخاص بالصورة */
+            /* تمديد الفريم المتقطع الوردي لأسفل */
             .left-section {
                 flex: 0.8;
                 background: var(--soft-pink);
                 border: 2px dashed var(--border-pink);
                 border-radius: 20px;
-                padding: 10px;
+                padding: 20px 10px;
                 display: flex;
-                align-items: center;
-                justify-content: center;
+                align-items: center; /* محاذاة الصورة في منتصف الفريم الممتد رأسياً */
+                justify-content: center; /* محاذاة الصورة في المنتصف أفقياً */
             }
 
+            /* جعل صورة البنت مصغرة ومتناسقة داخل الفريم الممتد بدون أن تتمدد هي نفسها */
             .character-image {
-                width: 100%;
-                height: 100%;
-                object-fit: contain; /* تجعل صورة حصة تظهر كاملة بدون قص وبشكل متناسق */
+                width: auto;
+                max-width: 100%;
+                max-height: 480px; /* للتحكم في حجم البنت لتبقى مصغرة ومرتبة داخل الفريم */
+                object-fit: contain;
                 border-radius: 14px;
             }
+
             /* إلغاء أي هوامش مسافات جانبيّة تحجب امتداد الهيرو */
             html,
             body {
@@ -594,14 +599,19 @@
                     opacity: 1;
                 }
             }
-            /* تنسيقات الفوتر الممتد المتناسق مع ألوان الموقع */
+            /* جعل الفوتر يمتد بعرض الشاشة الكامل مثل الهيرو سكشن تماماً */
             .site-footer {
-                width: 100%;
+                width: 100vw;
                 position: relative;
+                left: 50%;
+                right: 50%;
+                margin-left: -50vw;
+                margin-right: -50vw;
                 background: #3d2b33;
                 color: #fdf2f5;
                 padding: 50px 20px 25px 20px;
                 margin-top: 60px;
+                margin-bottom: -40px; /* لالغاء البادينج السفلي للـ body */
                 text-align: center;
                 box-sizing: border-box;
             }
@@ -685,7 +695,70 @@
                 color: #8a4358 !important;
                 transform: translateY(-2px);
             }
-			
+            /* تأثير انسيابي راقي للتبويبات والأزرار */
+            .tab-btn,
+            .hero-action-btn,
+            .download-link {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            }
+
+            .tab-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(232, 165, 184, 0.3);
+            }
+
+            /* تأثير تحليق لطيف لبطاقات الشخصيات */
+            .tab-content {
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+            }
+
+            .tab-content:hover {
+                box-shadow: 0 15px 35px rgba(168, 88, 112, 0.12);
+            }
+            /* تخصيص شريط التمرير للموقع بالكامل وصندوق الشات */
+            ::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #faf7f8;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: var(--border-pink);
+                border-radius: 10px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--primary-pink);
+            }
+            /* إضافة نقطة خضراء تنبض بذكاء بجانب حالة الشات */
+            .chat-user-info p::before {
+                content: "";
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                background-color: #4caf50;
+                border-radius: 50%;
+                margin-left: 6px;
+                box-shadow: 0 0 0 rgba(76, 175, 80, 0.4);
+                animation: pulseGlow 2s infinite;
+            }
+
+            @keyframes pulseGlow {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+                }
+                70% {
+                    box-shadow: 0 0 0 8px rgba(76, 175, 80, 0);
+                }
+                100% {
+                    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+                }
+            }
         </style>
     </head>
     <body>
