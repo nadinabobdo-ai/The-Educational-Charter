@@ -759,6 +759,194 @@
                     box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
                 }
             }
+			/* =========================
+   تحدي أبطال الميثاق
+========================= */
+
+.quiz-section {
+    width: 100%;
+    max-width: 1000px;
+    margin: 70px auto;
+    padding: 45px 25px;
+    background: #fff;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+}
+
+.quiz-title {
+    color: #8a4358;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.quiz-description {
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.quiz-box {
+    max-width: 720px;
+    margin: auto;
+}
+
+.quiz-progress {
+    height: 8px;
+    background: #f1e1e6;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.quiz-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #a85870;
+    transition: width 0.4s ease;
+}
+
+.quiz-question {
+    font-size: 21px;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 25px;
+}
+
+.quiz-options {
+    display: grid;
+    gap: 12px;
+}
+
+.quiz-option {
+    border: 2px solid #ead2da;
+    background: #fffafb;
+    padding: 15px;
+    border-radius: 14px;
+    color: #8a4358;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.quiz-option:hover {
+    background: #f8e8ee;
+    transform: translateY(-2px);
+}
+
+.quiz-result {
+    display: none;
+}
+
+.quiz-score {
+    font-size: 40px;
+    font-weight: bold;
+    color: #a85870;
+    margin: 20px 0;
+}
+
+.quiz-message {
+    color: #555;
+    line-height: 1.8;
+    font-size: 18px;
+}
+
+.quiz-restart {
+    margin-top: 25px;
+    border: none;
+    background: #a85870;
+    color: white;
+    padding: 13px 30px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+}
+/* =========================
+   هل تعلم؟
+========================= */
+
+.facts-section {
+    width: 100%;
+    max-width: 1000px;
+    margin: 70px auto;
+    text-align: center;
+}
+
+.facts-title {
+    color: #8a4358;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.facts-subtitle {
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.facts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.fact-card {
+    min-height: 180px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.fact-inner {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    transition: transform 0.7s;
+    transform-style: preserve-3d;
+}
+
+.fact-card.flipped .fact-inner {
+    transform: rotateY(180deg);
+}
+
+.fact-front,
+.fact-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 22px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+}
+
+.fact-front {
+    background: linear-gradient(135deg, #fff5f8, #fbe9ef);
+    color: #8a4358;
+}
+
+.fact-front h3 {
+    margin: 0 0 10px;
+}
+
+.fact-front p {
+    color: #999;
+}
+
+.fact-back {
+    background: #a85870;
+    color: white;
+    transform: rotateY(180deg);
+    line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+    .facts-grid {
+        grid-template-columns: 1fr;
+    }
+}
         </style>
     </head>
     <body>
@@ -1104,6 +1292,112 @@
                     <div class="image-placeholder-text"></div>
                 </div>
             </div>
+			
+			            <!-- فاصل جمالي بلمسة ناعمة -->
+            <div class="section-divider">
+                <span class="divider-line"></span>
+                <span class="divider-icon">✦</span>
+                <span class="divider-line"></span>
+            </div>
+
+<section class="quiz-section" id="quiz-section">
+
+    <h2 class="quiz-title">تحدي أبطال الميثاق</h2>
+
+    <p class="quiz-description">
+        اختبر معلوماتك واكتشف مدى قربك من أن تصبح بطلًا من أبطال الميثاق!
+    </p>
+
+    <div class="quiz-box" id="quizBox">
+
+        <div class="quiz-progress">
+            <div class="quiz-progress-bar" id="quizProgress"></div>
+        </div>
+
+        <div class="quiz-question" id="quizQuestion"></div>
+
+        <div class="quiz-options" id="quizOptions"></div>
+
+    </div>
+
+    <div class="quiz-result" id="quizResult">
+
+        <h3>انتهى التحدي!</h3>
+
+        <div class="quiz-score" id="quizScore"></div>
+
+        <p class="quiz-message" id="quizMessage"></p>
+
+        <button class="quiz-restart" onclick="restartQuiz()">
+            إعادة التحدي
+        </button>
+
+    </div>
+
+</section>
+<section class="facts-section" id="facts-section">
+
+    <h2 class="facts-title">هل تعلم؟</h2>
+
+    <p class="facts-subtitle">
+        اضغط على البطاقة لاكتشاف المعلومة
+    </p>
+
+    <div class="facts-grid">
+
+        <div class="fact-card" onclick="this.classList.toggle('flipped')">
+            <div class="fact-inner">
+
+                <div class="fact-front">
+                    <h3>المواطنة الإيجابية</h3>
+                    <p>اضغط لاكتشاف المعلومة</p>
+                </div>
+
+                <div class="fact-back">
+                    المشاركة والتعاون واحترام الآخرين
+                    كلها صور من صور المواطنة الإيجابية.
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="fact-card" onclick="this.classList.toggle('flipped')">
+            <div class="fact-inner">
+
+                <div class="fact-front">
+                    <h3>التسامح</h3>
+                    <p>اضغط لاكتشاف المعلومة</p>
+                </div>
+
+                <div class="fact-back">
+                    التسامح يساعدنا على بناء علاقات أفضل
+                    ومجتمع أكثر ترابطًا.
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="fact-card" onclick="this.classList.toggle('flipped')">
+            <div class="fact-inner">
+
+                <div class="fact-front">
+                    <h3>المستقبل</h3>
+                    <p>اضغط لاكتشاف المعلومة</p>
+                </div>
+
+                <div class="fact-back">
+                    الابتكار والتفكير الواعي من المهارات
+                    المهمة لمواكبة المستقبل.
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
 
             <!-- فاصل جمالي بلمسة ناعمة -->
             <div class="section-divider">
@@ -1337,6 +1631,146 @@
                     // إعادة ضبط القائمة
                     select.value = "";
                 }
+				const quizQuestions = [
+    {
+        question: "أي تصرف يعبر عن المواطنة الإيجابية؟",
+        options: [
+            "المحافظة على الممتلكات العامة",
+            "تجاهل احتياجات الآخرين",
+            "إلقاء المخلفات في الأماكن العامة",
+            "عدم احترام القوانين"
+        ],
+        answer: 0
+    },
+    {
+        question: "عندما تختلف مع شخص آخر، ما التصرف الأفضل؟",
+        options: [
+            "رفع الصوت",
+            "السخرية منه",
+            "الاستماع إليه واحترام رأيه",
+            "إنهاء الحوار فورًا"
+        ],
+        answer: 2
+    },
+    {
+        question: "أي قيمة ترتبط بمساعدة الآخرين والتعاون معهم؟",
+        options: [
+            "الأنانية",
+            "التعاون",
+            "الإهمال",
+            "اللامبالاة"
+        ],
+        answer: 1
+    },
+    {
+        question: "المحافظة على البيئة مسؤولية...",
+        options: [
+            "شخص واحد فقط",
+            "المدرسة فقط",
+            "الأسرة فقط",
+            "الجميع"
+        ],
+        answer: 3
+    },
+    {
+        question: "ما الذي يعكس الاعتزاز بالهوية الوطنية؟",
+        options: [
+            "احترام الوطن وتراثه وقيمه",
+            "إهمال التراث",
+            "عدم الاهتمام بالمجتمع",
+            "رفض التعاون مع الآخرين"
+        ],
+        answer: 0
+    }
+];
+
+let quizIndex = 0;
+let quizScore = 0;
+
+function loadQuizQuestion() {
+
+    const q = quizQuestions[quizIndex];
+
+    document.getElementById("quizQuestion").textContent = q.question;
+
+    const optionsContainer = document.getElementById("quizOptions");
+
+    optionsContainer.innerHTML = "";
+
+    q.options.forEach((option, index) => {
+
+        const button = document.createElement("button");
+
+        button.className = "quiz-option";
+        button.textContent = option;
+
+        button.onclick = function () {
+            answerQuiz(index);
+        };
+
+        optionsContainer.appendChild(button);
+    });
+
+    const progress =
+        ((quizIndex) / quizQuestions.length) * 100;
+
+    document.getElementById("quizProgress").style.width =
+        progress + "%";
+}
+
+function answerQuiz(selected) {
+
+    if (selected === quizQuestions[quizIndex].answer) {
+        quizScore++;
+    }
+
+    quizIndex++;
+
+    if (quizIndex < quizQuestions.length) {
+
+        loadQuizQuestion();
+
+    } else {
+
+        showQuizResult();
+
+    }
+}
+
+function showQuizResult() {
+
+    document.getElementById("quizBox").style.display = "none";
+
+    document.getElementById("quizResult").style.display = "block";
+
+    document.getElementById("quizScore").textContent =
+        quizScore + " / " + quizQuestions.length;
+
+    let message = "";
+
+    if (quizScore === quizQuestions.length) {
+        message = "مذهل! لديك وعي رائع بقيم الميثاق. أنت بطل حقيقي!";
+    } else if (quizScore >= 3) {
+        message = "أداء رائع! أنت على الطريق الصحيح لتكون من أبطال الميثاق.";
+    } else {
+        message = "بداية جميلة! استكشف قصص الأبطال وحاول التحدي مرة أخرى.";
+    }
+
+    document.getElementById("quizMessage").textContent = message;
+}
+
+function restartQuiz() {
+
+    quizIndex = 0;
+    quizScore = 0;
+
+    document.getElementById("quizBox").style.display = "block";
+    document.getElementById("quizResult").style.display = "none";
+
+    loadQuizQuestion();
+}
+
+loadQuizQuestion();
             </script>
         </div>
     </body>
