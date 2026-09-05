@@ -1963,20 +1963,32 @@
                     });
                 });
 
-                /* ===== نجوم عند الضغط ===== */
+                /* ===== نجوم عند النقر ===== */
 
                 document.addEventListener("click", function (e) {
                     const sparkSymbols = ["✦", "✧", "⋆", "✦"];
+
+                    const sparkColors = [
+                        "#e91e63" /* وردي */,
+                        "#f4c542" /* ذهبي */,
+                        "#9c6ade" /* موف */,
+                        "#6ec6ca" /* تركواز */,
+                    ];
 
                     for (let i = 0; i < 4; i++) {
                         const spark = document.createElement("span");
 
                         spark.className = "click-spark";
+
                         spark.textContent = sparkSymbols[Math.floor(Math.random() * sparkSymbols.length)];
 
                         spark.style.left = e.clientX + "px";
                         spark.style.top = e.clientY + "px";
 
+                        /* اختيار لون عشوائي لكل نجمة */
+                        spark.style.color = sparkColors[Math.floor(Math.random() * sparkColors.length)];
+
+                        /* اتجاه وحركة عشوائية */
                         spark.style.setProperty("--x", Math.random() * 50 - 25 + "px");
 
                         spark.style.setProperty("--y", Math.random() * -60 - 10 + "px");
